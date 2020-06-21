@@ -45,15 +45,10 @@ if (repositoryIndex < 0) {
   return response.status(400).json({ error: 'Repository not found.'});
 }
 
-const repository = {
-  id,
-  title,
-  url,
-  techs
-}
-
-repositories[repositoryIndex]  = repository;
-  return response.json(repository);
+    likes = repositories[repositoryIndex].likes
+    const repository = { id, title, url, techs, likes} 
+    repositories[repositoryIndex] = repository
+    return response.json(repository)
 });
 
 app.delete('/repositories/:id', (request, response) => {
