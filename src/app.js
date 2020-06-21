@@ -81,8 +81,15 @@ app.post("/repositories/:id/like", (request, response) => {
 
   const repository = repositories.find(repository => repository.id == id);
 
-  repository.likes += 1;
+  const repositoryIndex = repositories.findIndex(repository => repository.id == id)
 
+  if (repositoryIndex < 0) {
+    console.log('Not able to delete a repository that does not exists')
+    return response.status(400).json({ error: 'Repository not found.'})
+  }
+  
+  repository.likes += 1;
+  
   return response.json(repository);
 });
 
